@@ -1,0 +1,98 @@
+<div class="container mt-4">
+  <form class="formStyle" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <h1>Registration Form</h1>
+      <div class="form-group">
+        <input 
+        type="text" 
+        class="form-control" 
+        placeholder="First Name" 
+        required name="firstName"
+        formControlName="firstName"
+        minlength="3"
+        maxlength="16"
+        [ngClass]="{'error': registrationForm.controls.firstName.touched && registrationForm.controls.firstName.status !== 'VALID'}" 
+        autocomplete="off">
+      </div>
+      <div class="form-group">
+        <input 
+        type="text" 
+        class="form-control" 
+        placeholder="Last Name" 
+        required name="lastName"
+        formControlName="lastName"
+        minlength="3"
+        maxlength="16"
+        [ngClass]="{'error': registrationForm.controls.lastName.touched && registrationForm.controls.lastName.status !== 'VALID'}" 
+        autocomplete="off">
+      </div >
+      <div class="form-group">
+        <input 
+        type="email" 
+        class="form-control" 
+        placeholder="Email" 
+        required name="email"
+        formControlName="email"
+        [ngClass]="{'error': registrationForm.controls.email.touched && registrationForm.controls.email.status !== 'VALID'}"  
+        autocomplete="off">
+      </div>
+      <div class="form-group">
+        <input 
+        type="text" 
+        class="form-control" 
+        placeholder="Contact Number" 
+        required name="number"
+        formControlName="number"
+        (keypress)="keyPressNumbers($event)"
+        pattern="[7-9]{1}[0-9]{9}"
+        maxlength="10"
+        [ngClass]="{'error': registrationForm.controls.number.touched && registrationForm.controls.number.status !== 'VALID'}"  
+        autocomplete="off">
+      </div>
+      <div class="form-group">
+        <input 
+        type="password" 
+        class="form-control" 
+        placeholder="Password" 
+        required name="password"
+        formControlName="password"
+        [ngClass]="{'error': registrationForm.controls.password.touched && registrationForm.controls.password.status !== 'VALID'}"  
+        autocomplete="off">
+      </div>
+      <div class="form-group">
+        <input 
+        type="password" 
+        class="form-control" 
+        placeholder="Confirm Password" 
+        required name="confirmPassword"
+        formControlName="confirmPassword"
+        [ngClass]="{'error': registrationForm.controls.confirmPassword.touched && registrationForm.controls.confirmPassword.status !== 'VALID'}"  
+        autocomplete="off">
+      </div>
+      <div *ngIf="registrationForm.controls.firstName.touched && registrationForm.controls.firstName.status !== 'VALID'" class="text-center">
+        <span style="border-color: red;color: red;">First Name must contains atleast 3 alphabets</span>
+      </div>
+      <div *ngIf="registrationForm.controls.lastName.touched && registrationForm.controls.lastName.status !== 'VALID'" class="text-center">
+        <span style="border-color: red;color: red;">Last Name must contains atleast 3 alphabets</span>
+      </div>
+      <div *ngIf="registrationForm.controls.email.touched && registrationForm.controls.email.status !== 'VALID'" class="text-center">
+        <span style="border-color: red;color: red;">Please check the email format</span>
+      </div>
+      <div *ngIf="registrationForm.controls.number.touched && registrationForm.controls.number.status !== 'VALID'" class="text-center">
+        <span style="border-color: red;color: red;">Mobile Number is not Valid ( Mobile number must starts with 7 | 8 | 9)</span>
+      </div>
+      <div *ngIf="registrationForm.value.password !== registrationForm.value.confirmPassword" class="text-center">
+        <span style="border-color: red;color: red;">Password and Confirm Password didn't matched</span>
+      </div>
+      <div *ngIf="submitted" class="text-center">
+        <span style="border-color: green;color: green;">Form Submitted Successfully</span>
+      </div>
+      <div class="form-group pt-2 mt-2" style="cursor: pointer !important">
+        <button 
+        type="submit" 
+        [disabled]="!registrationForm.valid"
+        [ngClass]="{'error': !registrationForm.valid}"><span style="font-size: 15px;">Submit</span>
+      </button>
+      </div>
+  </form>
+</div>
+
